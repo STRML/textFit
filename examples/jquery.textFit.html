@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script src="jquery.textFit.slow.js"></script>
+    <script>
+      $(function(){
+        $("#container").textFit({maxFontSize: 160})
+        $("#multiLine").textFit()
+        $("#centeredMultiLine").textFit({alignHoriz: true, alignVert: true})
+      });
+    </script>
+    <style>
+      div{
+        border: 1px solid black;
+        margin: 20px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1> jQuery.textFit Examples </h1>
+    <p> These examples are run in slo-mo using setInterval to show how they work.</p>
+    <div id="container" style="width: 200px; height: 200px; font-size: 8px">
+      Text
+    </div>
+    <div id="multiLine" style="width: 200px; height: 200px; font-size: 8px">
+      Multiline<br>
+      Text
+    </div>
+    <div id="centeredMultiLine" style="width: 200px; height: 200px; font-size: 8px">
+      Centered<br>
+      Multiline<br>
+      Text
+    </div>
+  </body>
+</html>

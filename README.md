@@ -3,6 +3,8 @@ jquery.textFit
 
 A **fast** jQuery plugin that quickly fits single and multi-line text to the width (and optionally height) of its container.
 
+[Example](http://strml.github.com/examples/jquery.textFit.html)
+
 Usage
 =====
 
