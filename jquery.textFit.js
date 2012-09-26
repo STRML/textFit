@@ -9,23 +9,29 @@
 
 (function($) {
     $.fn.textFit = function(options) {
+        var settings = {
+            alignVert: false, // if true, textFit will align vertically using css tables
+            alignHoriz: false, // if true, textFit will set text-align: center
+            multiLine: false, // if true, textFit will not set white-space: no-wrap
+            detectMultiLine: true, // disable to turn off automatic multi-line sensing
+            minFontSize: 6,
+            maxFontSize: 80,
+            reProcess: false, // if true, textFit will re-process already-fit nodes. Leave to 'false' for better performance
+            widthOnly: false // if true, textFit will fit text to element width, regardless of text height
+        };
+        $.extend(settings, options);
+
         return this.each(function(){
-            var innerSpan, originalHeight, originalText, originalWidth, settings;
-            var low, mid, high;
-            if (this.length === 0) {
+
+            if (this.length === 0 || (!settings.reProcess && $(this).data('boxfitted'))) {
                 return $(this);
             }
-            settings = {
-                alignVert: false, // if true, textFit will align vertically using css tables
-                alignHoriz: false, // if true, textFit will set text-align: center
-                multiLine: false, // if true, textFit will not set white-space: no-wrap
-                detectMultiLine: true, // disable to turn off automatic multi-line sensing
-                minFontSize: 6,
-                maxFontSize: 80,
-                reProcess: false, // if true, textFit will re-process already-fit nodes. Leave to 'false' for better performance
-                widthOnly: false // if true, textFit will fit text to element width, regardless of text height
-            };
-            $.extend(settings, options);
+            if(!settings.reProcess){
+                $(this).data('boxfitted', 1);
+            }
+            var innerSpan, originalHeight, originalText, originalWidth;
+            var low, mid, high;
+
             originalText = $(this).html();
             $(this).html("");
             originalWidth = $(this).width();
@@ -43,13 +49,11 @@
                 }
                 return $(this).html(originalText);
             } else {
-
                 // Add textfitted span
                 if (originalText.indexOf('textfitted') === -1) {
                     innerSpan = $("<span></span>").addClass("textfitted").html(originalText);
                     $(this).html(innerSpan);
                 } else {
-                    if(options.reprocess === false) return;
                     $(this).html(originalText);
                     innerSpan = $(originalText).find('span.textfitted');
                 }
@@ -67,7 +71,7 @@
 
                 // Check if this string is multiple lines
                 // Not guaranteed to always work if you use wonky line-heights
-                if (!settings.multiLine && settings.detectMultiLine &&
+                if (settings.detectMultiLine && !settings.multiLine &&
                       innerSpan.height() >= parseInt(innerSpan.css('font-size'), 10) * 2){
                     settings.multiLine = true;
                 }
@@ -75,8 +79,8 @@
                     $(this).css('white-space', 'nowrap');
                 }
 
-                low = settings.minFontSize;
-                high = settings.maxFontSize;
+                low = settings.minFontSize + 1;
+                high = settings.maxFontSize + 1;
 
                 // Binary search for best fit
                 while ( low <= high) {
@@ -88,10 +92,8 @@
                         high = mid - 1;
                     }
                 }
-                // Sub 1 if we ended up high
-                if(innerSpan.width() > originalWidth && (settings.widthOnly || innerSpan.height() > originalHeight)){
-                    innerSpan.css('font-size', mid - 1);
-                }
+                // Sub 1
+                innerSpan.css('font-size', mid - 1);
             }
         });
     };
