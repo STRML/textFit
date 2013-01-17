@@ -1,0 +1,35 @@
+{
+  "name": "TextFit",
+  "title": "jQuery TextFit",
+  "description": "A jQuery Plugin for fitting text to a box of any size while respecting styling.",
+  "keywords": [
+    "textFit",
+    "fit text",
+    "text fit",
+    "autosize",
+    "text sizing"
+  ],
+  "version": "0.2.0",
+  "author": {
+    "name": "STRML (Samuel Reed)",
+    "url": "http://strml.net"
+  },
+  "maintainers": [
+    {
+      "name": "Samuel Reed",
+      "email": "samuel.trace.reed@gmail.com",
+      "url": "http://strml.net"
+    }
+  ],
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "bugs": "https://github.com/STRML/jquery.textFit/issues",
+  "homepage": "https://github.com/STRML/jquery.textFit",
+  "docs": "https://github.com/STRML/jquery.textFit",
+  "dependencies": {
+    "jquery": ">=1.5"
+  }
+}
