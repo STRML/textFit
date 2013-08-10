@@ -2,18 +2,23 @@
 "http://www.w3.org/TR/html4/strict.dtd">
 <html>
   <head>
-    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-    <script src="jquery.textFit.slow.js"></script>
+    <script src="textFit.slow.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Astloch' rel='stylesheet' type='text/css'>
     <script>
-      $(function(){
-        $("#container").textFit({maxFontSize: 120});
-        $("#horizCentered").textFit({alignHoriz: true});
-        $("#multiLine, #letterSpacing, #lineHeight, #fontFaces, #padding").textFit();
-        $("#vertCentered").textFit({alignVert: true});
-        $("#centeredMultiLine").textFit({alignHoriz: true, alignVert: true});
-        $("#maxFontSize").textFit({maxFontSize: 40});
-      });
+      function doFit(){
+        textFit(document.getElementById('container'), {maxFontSize: 120});
+        textFit(document.getElementById('horizCentered'), {alignHoriz: true});
+        textFit([
+          document.getElementById('multiLine'), 
+          document.getElementById('letterSpacing'), 
+          document.getElementById('lineHeight'), 
+          document.getElementById('padding'),
+          document.getElementById('fontFaces'), 
+        ], {multiLine: true});
+        textFit(document.getElementById('vertCentered'), {alignVert: true, multiLine: true});
+        textFit(document.getElementById('centeredMultiLine'), {alignHoriz: true, alignVert: true});
+        textFit(document.getElementById('maxFontSize'), {maxFontSize: 40});
+      }
     </script>
     <style>
       body{
@@ -90,11 +95,14 @@
   </head>
   <body>
     <span class="header">
-      <h1> jQuery.textFit Examples </h1>
-      <h3> jQuery.textFit <b>respects existing CSS</b> and fits within the box it is placed, regardless of padding,
+      <h1> TextFit Examples </h1>
+      <h3> TextFit <b>respects existing CSS</b> and fits within the box it is placed, regardless of padding,
            line-height, font-face, or letter-spacing.
       </h3>
-      <p> These examples are run in slow motion using setInterval to show how they work. Actual sizings are invisible and average &lt;3ms.</p>
+      <h4>
+        TextFit does <u>not</u> require jQuery.
+      </h4>
+      <p> These examples are run in <u>slow motion</u> using setInterval to show how they work. Actual sizings are invisible and average &lt;2ms.</p>
       <p> View source to see how options are applied.</p>
     </span>
     <div id="container">
@@ -115,7 +123,6 @@
       Multiline<br>
       Text
     </div>
-    <br>
     <div id="maxFontSize" class="optionalCSS">
       Set a Maximum<br>
       Font Size
@@ -136,5 +143,8 @@
       Use Any Custom Padding
     </div>
     <a class="homeLink" href="http://strml.github.com">Created by STRML</a>
+    <script>
+      doFit()
+    </script>
   </body>
 </html>

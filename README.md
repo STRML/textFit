@@ -1,9 +1,9 @@
-jquery.textFit
+textFit v2.0
 ==============
 
-A **fast** jQuery plugin that quickly fits single and multi-line text to the width (and optionally height) of its container.
+A **fast**, jQuery-free text sizing component that quickly fits single and multi-line text to the width (and optionally height) of its container.
 
-[Example](http://strml.github.com/examples/jquery.textFit.html)
+[Example](http://strml.github.com/examples/textFit.html)
 
 Usage
 =====
@@ -15,7 +15,12 @@ Usage
 ```
 
 ```javascript
-$(".box").textFit()
+// textFit accepts arrays
+textFit(document.getElementsByClassName('box'));
+// or single DOM elements
+textFit(document.getElementsByClassName('box')[0]);
+// Use jQuery selectors if you like.
+textFit($('#box')[0])
 ```
 
 The text will scale until it reaches the horizontal or vertical bounds of the box.
@@ -27,7 +32,7 @@ Advanced Usage
 Multiline Strings
 -----------------
 
-If your text has multiple lines, jQuery.textFit() will automatically detect that and disable white-space: no-wrap!
+If your text has multiple lines, textFit() will automatically detect that and disable white-space: no-wrap!
 No changes are necessary.
 
 ```html
@@ -39,14 +44,14 @@ No changes are necessary.
 ```
 
 ```javascript
-$(".box").textFit()
+textFit(document.getElementsByClassName('box'))
 ```
 
 If, for some reason, the automatic detection is not working out for you, use the following to explicitly turn on
-multiLine:
+multiLine fitting:
 
 ```javascript
-$(".box").textFit({multiLine:true});
+textFit(document.getElementsByClassName('box'), {multiLine: true})
 ```
 
 Horizontal/Vertical Centering
@@ -62,13 +67,13 @@ Horizontal/Vertical Centering
 ```
 
 ```javascript
-$(".box").textFit({alignHoriz:true, alignVert:true})
+textFit(document.getElementsByClassName('box'), {alignHoriz: true, alignVert: true})
 ```
 
 Minimum and Maximum Sizes
 -------------------------
 
-Sometimes you want to make sure that your text remains sanely sizes if it is very short or very long. jQuery.textFit
+Sometimes you want to make sure that your text remains sanely sizes if it is very short or very long. textFit
 has you covered:
 
 ```html
@@ -78,16 +83,16 @@ has you covered:
 ```
 
 ```javascript
-$(".box").textFit({minFontSize:10, maxFontSize: 50});
+textFit(document.getElementsByClassName('box'), {minFontSize:10, maxFontSize: 50})
 ```
 
 Implementation Details
 ----------------------
-jQuery.textFit determines reasonable minimum and maximum bounds for your text. The defaults are listed below.
+textFit determines reasonable minimum and maximum bounds for your text. The defaults are listed below.
 
-To ensure accurate results with various font-faces, line-heights, and letter-spacings, jQuery.textFit resizes the text
-until it fits the box as accurately as possible. Unlike many similar plugins, jQuery.textFit uses **binary search** to
-find the correct fit, which speeds the process significantly. jQuery.textFit() is fast enough to use in production
+To ensure accurate results with various font-faces, line-heights, and letter-spacings, textFit resizes the text
+until it fits the box as accurately as possible. Unlike many similar plugins, textFit uses **binary search** to
+find the correct fit, which speeds the process significantly. textFit() is fast enough to use in production
 websites.
 
 Default Settings
