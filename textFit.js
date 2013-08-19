@@ -130,7 +130,7 @@
       // Binary search for best fit
       while ( low <= high) {
         mid = parseInt((low + high) / 2, 10);
-        innerSpan.style['font-size'] = mid + 'px';
+        innerSpan.style.fontSize = mid + 'px';
         if(innerSpan.offsetWidth <= originalWidth && (settings.widthOnly || innerSpan.offsetHeight <= originalHeight)){
           low = mid + 1;
         } else {
@@ -138,19 +138,23 @@
         }
       }
       // Sub 1 at the very end, this is closer to what we wanted.
-      innerSpan.style['font-size'] = (mid - 1) + 'px';
+      innerSpan.style.fontSize = (mid - 1) + 'px';
     }
 
     // Calculate height without padding.
     function innerHeight(el){
       var style = window.getComputedStyle(el, null);
-      return el.clientHeight - parseInt(style['padding-top'], 10) - parseInt(style['padding-bottom'], 10);
+      return el.clientHeight -
+        parseInt(style.getPropertyValue('padding-top'), 10) -
+        parseInt(style.getPropertyValue('padding-bottom'), 10);
     }
 
     // Calculate width without padding.
     function innerWidth(el){
       var style = window.getComputedStyle(el, null);
-      return el.clientWidth - parseInt(style['padding-left'], 10) - parseInt(style['padding-right'], 10);
+      return el.clientWidth -
+        parseInt(style.getPropertyValue('padding-left'), 10) -
+        parseInt(style.getPropertyValue('padding-right'), 10);
     }
   };
 }));
