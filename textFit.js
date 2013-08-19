@@ -11,7 +11,7 @@
  * Uses binary search to fit text with minimal layout calls.
  * Version 2.0 does not use jQuery.
  */
-/*global define:true, document:true, window:true*/
+/*global define:true, document:true, window:true, HTMLElement:true*/
 
 (function(root, factory) {
   "use strict";
@@ -47,8 +47,14 @@
       }
     }
 
+    // Convert jQuery objects into arrays
+    if (typeof els.toArray === "function") {
+      els = els.toArray();
+    }
+
     // Support passing a single el
-    if (Object.prototype.toString.call( els ) !== '[object Array]'){
+    var elType = Object.prototype.toString.call(els);
+    if (elType !== '[object Array]' && elType !== '[object NodeList]'){
       els = [els];
     }
 
@@ -58,7 +64,7 @@
 
     function processItem(el){
 
-      if (el.length === 0 || (!settings.reProcess && el.getAttribute('boxfitted'))) {
+      if (!isElement(el) || (!settings.reProcess && el.getAttribute('boxfitted'))) {
         return false;
       }
 
@@ -155,6 +161,14 @@
       return el.clientWidth -
         parseInt(style.getPropertyValue('padding-left'), 10) -
         parseInt(style.getPropertyValue('padding-right'), 10);
+    }
+
+    //Returns true if it is a DOM element    
+    function isElement(o){
+      return (
+        typeof HTMLElement === "object" ? o instanceof HTMLElement : //DOM2
+        o && typeof o === "object" && o !== null && o.nodeType === 1 && typeof o.nodeName==="string"
+      );
     }
   };
 }));
