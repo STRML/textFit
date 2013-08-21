@@ -99,6 +99,9 @@
       if (originalHTML.indexOf('textfitted') === -1) {
         innerSpan = document.createElement('span');
         innerSpan.className = 'textfitted';
+        // Inline block ensure it takes on the size of its contents, even if they are enclosed
+        // in other tags like <p>
+        innerSpan.style['display'] = 'inline-block';
         innerSpan.innerHTML = originalHTML;
         el.innerHTML = '';
         el.appendChild(innerSpan);
