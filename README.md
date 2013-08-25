@@ -5,6 +5,15 @@ A **fast**, jQuery-free text sizing component that quickly fits single and multi
 
 [Example](http://strml.github.com/examples/textFit.html)
 
+Browser Support
+===============
+
+`textFit` supports IE9+, Firefox, Chrome, Opera, and most mobile browsers. If you find an incompatibility,
+please file an issue.
+
+If you require IE <= 8 support, please use the [jQuery version](https://github.com/STRML/textFit/tree/1.0-jQuery).
+Functionality is identical between v1.0 and v2.0, the only change was the removal of the jQuery dependency.
+
 Usage
 =====
 
