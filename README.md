@@ -1,4 +1,4 @@
-textFit v2.0
+textFit v2.1
 ==============
 
 A **fast**, jQuery-free text sizing component that quickly fits single and multi-line text to the width (and optionally height) of its container.
@@ -13,6 +13,21 @@ please file an issue.
 
 If you require IE <= 8 support, please use the [jQuery version](https://github.com/STRML/textFit/tree/1.0-jQuery).
 Functionality is identical between v1.0 and v2.0, the only change was the removal of the jQuery dependency.
+
+Changelog
+=========
+
+v2.1
+----
+
+* Reworked alignVert.
+* `reProcess` is now `true` by default. Set to `false` if you want to fire-and-forget on potentially 
+   processed nodes. This was originally false by default because it was being used in an infinite scrolling list.
+
+v2.0
+----
+
+* Removed jQuery dependency.
 
 Usage
 =====
@@ -117,7 +132,7 @@ settings = {
     detectMultiLine: true, // disable to turn off automatic multi-line sensing
     minFontSize: 6,
     maxFontSize: 80,
-    reProcess: false, // if true, textFit will re-process already-fit nodes. Leave to 'false' for better performance
+    reProcess: true, // if true, textFit will re-process already-fit nodes. Set to 'false' for better performance
     widthOnly: false // if true, textFit will fit text to element width, regardless of text height
 };
 ```

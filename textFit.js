@@ -36,7 +36,7 @@
       detectMultiLine: true, // disable to turn off automatic multi-line sensing
       minFontSize: 6,
       maxFontSize: 80,
-      reProcess: false, // if true, textFit will re-process already-fit nodes. Leave to 'false' for better performance
+      reProcess: true, // if true, textFit will re-process already-fit nodes. Set to 'false' for better performance
       widthOnly: false, // if true, textFit will fit text to element width, regardless of text height
       suppressErrors: false // if true, will not print errors to console
     };
