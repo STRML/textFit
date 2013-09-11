@@ -16,7 +16,7 @@
 (function(root, factory) {
   "use strict";
 
-  if (false && typeof define === "function" && define.amd) {
+  if (typeof define === "function" && define.amd) {
     // AMD. Register as an anonymous module.
     // Wrap in function so we have access to root via `this`.
     define([], factory);
