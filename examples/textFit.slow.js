@@ -53,13 +53,13 @@
 
     function processItem(el){
 
-      if (!isElement(el) || (!settings.reProcess && el.getAttribute('boxfitted'))) {
+      if (!isElement(el) || (!settings.reProcess && el.getAttribute('textFitted'))) {
         return false;
       }
 
-      // Set boxfitted attribute so we know this was processed.
+      // Set textFitted attribute so we know this was processed.
       if(!settings.reProcess){
-        el.setAttribute('boxfitted', 1);
+        el.setAttribute('textFitted', 1);
       }
 
       var innerSpan, originalHeight, originalHTML, originalWidth;
@@ -84,10 +84,10 @@
         return false;
       }
 
-      // Add textfitted span inside this container.
-      if (originalHTML.indexOf('textfitted') === -1) {
+      // Add textFitted span inside this container.
+      if (originalHTML.indexOf('textFitted') === -1) {
         innerSpan = document.createElement('span');
-        innerSpan.className = 'textfitted';
+        innerSpan.className = 'textFitted';
         // Inline block ensure it takes on the size of its contents, even if they are enclosed
         // in other tags like <p>
         innerSpan.style['display'] = 'inline-block';
@@ -95,15 +95,15 @@
         el.innerHTML = '';
         el.appendChild(innerSpan);
       } else {
-        innerSpan = el.querySelector('span.textfitted');
+        // Reprocessing.
+        innerSpan = el.querySelector('span.textFitted');
+        // Remove vertical align if we're reprocessing.
+        if (hasClass(innerSpan, 'textFitAlignVert')){
+          innerSpan.className = innerSpan.className.replace('textFitAlignVert', '');
+        }
       }
 
       // Prepare & set alignment
-      if (settings.alignVert) {
-        el.style['display'] = 'table';
-        innerSpan.style['display'] = 'table-cell';
-        innerSpan.style['vertical-align'] = 'middle';
-      }
       if (settings.alignHoriz) {
         el.style['text-align'] = 'center';
         innerSpan.style['text-align'] = 'center';
@@ -136,11 +136,27 @@
         }
         if(low > high){
           clearInterval(fitInterval);
+          finish();
           // Sub 1 at the very end, this is closer to what we wanted.
           innerSpan.style.fontSize = (mid - 1) + 'px';
         }
       }
       var fitInterval = setInterval(fit, 500);
+
+      function finish() {
+        // Our height is finalized. If we are aligning vertically, set that up.
+        if (settings.alignVert) {
+          addStyleSheet();
+          var height = innerSpan.offsetHeight;
+          if (window.getComputedStyle(el)['position'] === "static"){
+            el.style['position'] = 'relative';
+          }
+          if (!hasClass(innerSpan, "textFitAlignVert")){
+            innerSpan.className = innerSpan.className + " textFitAlignVert";
+          }
+          innerSpan.style['height'] = height + "px";
+        }
+      }
     }
 
     // Calculate height without padding.
@@ -159,12 +175,33 @@
         parseInt(style.getPropertyValue('padding-right'), 10);
     }
 
-    //Returns true if it is a DOM element    
+    function hasClass(element, cls) {
+      return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+    }
+
+    // Returns true if it is a DOM element    
     function isElement(o){
       return (
         typeof HTMLElement === "object" ? o instanceof HTMLElement : //DOM2
         o && typeof o === "object" && o !== null && o.nodeType === 1 && typeof o.nodeName==="string"
       );
+    }
+
+    // Better than a stylesheet dependency
+    function addStyleSheet() {
+      if (document.getElementById("textFitStyleSheet")) return;
+      var style = [
+        ".textFitAlignVert{",
+          "position: absolute;",
+          "top: 0; right: 0; bottom: 0; left: 0;",
+          "margin: auto;",
+        "}"].join("");
+
+      var css = document.createElement("style");
+      css.type = "text/css";
+      css.id = "textFitStyleSheet";
+      css.innerHTML = style;
+      document.body.appendChild(css);
     }
   };
 }));
