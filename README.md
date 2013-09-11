@@ -1,4 +1,4 @@
-textFit v2.1
+textFit v2.1.0
 ==============
 
 A **fast**, jQuery-free text sizing component that quickly fits single and multi-line text to the width (and optionally height) of its container.
