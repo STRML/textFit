@@ -1,5 +1,5 @@
 /**
- * textFit v2.0
+ * textFit v2.1.0
  * Previously known as jQuery.textFit
  * 8/2013 by STRML (strml.github.com)
  * MIT License
