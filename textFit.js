@@ -1,7 +1,7 @@
 /**
- * textFit v2.1.0
+ * textFit v2.1.1
  * Previously known as jQuery.textFit
- * 8/2013 by STRML (strml.github.com)
+ * 11/2014 by STRML (strml.github.com)
  * MIT License
  * 
  * To use: textFit(document.getElementById('target-div'), options);
@@ -16,12 +16,15 @@
 (function(root, factory) {
   "use strict";
 
+  // UMD shim
   if (typeof define === "function" && define.amd) {
-    // AMD. Register as an anonymous module.
-    // Wrap in function so we have access to root via `this`.
+    // AMD
     define([], factory);
+  } else if (typeof exports === "object") {
+    // Node/CommonJS
+    module.exports = factory();
   } else {
-    // Browser globals
+    // Browser
     root.textFit = factory();
   }
 
@@ -112,6 +115,7 @@
         // Remove vertical align if we're reprocessing.
         if (hasClass(innerSpan, 'textFitAlignVert')){
           innerSpan.className = innerSpan.className.replace('textFitAlignVert', '');
+          innerSpan.style['height'] = '';
         }
       }
 

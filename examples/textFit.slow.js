@@ -1,18 +1,21 @@
 // Copy of textFit.js with interval call so users can see fitting in progress.
 /*global define:true, document:true, window:true, HTMLElement: true*/
 
-
 (function(root, factory) {
   "use strict";
 
-  if (false && typeof define === "function" && define.amd) {
-    // AMD. Register as an anonymous module.
-    // Wrap in function so we have access to root via `this`.
+  // UMD shim
+  if (typeof define === "function" && define.amd) {
+    // AMD
     define([], factory);
+  } else if (typeof exports === "object") {
+    // Node/CommonJS
+    module.exports = factory();
   } else {
-    // Browser globals
+    // Browser
     root.textFit = factory();
   }
+
 
 }(typeof global === "object" ? global : this, function () {
   "use strict";
@@ -100,6 +103,7 @@
         // Remove vertical align if we're reprocessing.
         if (hasClass(innerSpan, 'textFitAlignVert')){
           innerSpan.className = innerSpan.className.replace('textFitAlignVert', '');
+          innerSpan.style['height'] = '';
         }
       }
 

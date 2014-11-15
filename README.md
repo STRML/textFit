@@ -17,6 +17,12 @@ Functionality is identical between v1.0 and v2.0, the only change was the remova
 Changelog
 =========
 
+v2.1.1
+------
+
+* Fixed a bug with `alignVert` when reprocessing.
+* Added full UMD shim and published to npm.
+
 v2.1
 ----
 
