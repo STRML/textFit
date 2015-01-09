@@ -139,7 +139,9 @@ settings = {
     minFontSize: 6,
     maxFontSize: 80,
     reProcess: true, // if true, textFit will re-process already-fit nodes. Set to 'false' for better performance
-    widthOnly: false // if true, textFit will fit text to element width, regardless of text height
+    widthOnly: false, // if true, textFit will fit text to element width, regardless of text height
+    suppressErrors: false, // if true, will not print errors to console
+    done: null // if function, it will be executed after the final redraw per element
 };
 ```
 
