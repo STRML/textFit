@@ -65,7 +65,7 @@
 
     for(var i = 0; i < els.length; i++){
       processItem(els[i]);
-      if (settings.done && isFunction(settings.done)) {
+      if (settings.done && typeof settings.done === 'function')) {
         settings.done(els[i]);
       }
     }
@@ -217,11 +217,6 @@
       css.id = "textFitStyleSheet";
       css.innerHTML = style;
       document.body.appendChild(css);
-    }
-
-    function isFunction(functionToCheck) {
-     var getType = {};
-     return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
     }
   };
 }));
