@@ -41,6 +41,7 @@
       maxFontSize: 80,
       reProcess: true, // if true, textFit will re-process already-fit nodes. Set to 'false' for better performance
       widthOnly: false, // if true, textFit will fit text to element width, regardless of text height
+      heightOnly: false, // if true, textFit will fit text to element height, regardless of text width
       suppressErrors: false // if true, will not print errors to console
     };
 
@@ -86,14 +87,17 @@
       originalHeight = innerHeight(el);
 
       // Don't process if we can't find box dimensions
-      if (!originalWidth || (!settings.widthOnly && !originalHeight)) {
+      if ((!originalWidth || (!settings.widthOnly && !originalHeight)) || (!originalHeight || (!settings.heightOnly && !originalWidth))) {
         // Show an error, if we can.
         if (window.console && !settings.suppressErrors) {
-          if(!settings.widthOnly)
-            console.info('Set a static height and width on the target element ' + el.outerHTML +
+          if(settings.widthOnly)
+            console.info('Set a static width on the target element ' + el.outerHTML +
+              ' before using textFit!');
+          if(!settings.heightOnly)
+            console.info('Set a static height on the target element ' + el.outerHTML +
               ' before using textFit!');
           else
-            console.info('Set a static width on the target element ' + el.outerHTML +
+            console.info('Set a static height and width on the target element ' + el.outerHTML +
               ' before using textFit!');
         }
         return false;
@@ -145,7 +149,7 @@
       while ( low <= high) {
         mid = parseInt((low + high) / 2, 10);
         innerSpan.style.fontSize = mid + 'px';
-        if(innerSpan.offsetWidth <= originalWidth && (settings.widthOnly || innerSpan.offsetHeight <= originalHeight)){
+        if((settings.heightOnly || innerSpan.offsetWidth <= originalWidth) && (settings.widthOnly || innerSpan.offsetHeight <= originalHeight)){
           low = mid + 1;
         } else {
           high = mid - 1;
