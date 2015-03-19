@@ -27,7 +27,7 @@ v2.1
 ----
 
 * Reworked alignVert.
-* `reProcess` is now `true` by default. Set to `false` if you want to fire-and-forget on potentially 
+* `reProcess` is now `true` by default. Set to `false` if you want to fire-and-forget on potentially
    processed nodes. This was originally false by default because it was being used in an infinite scrolling list.
 
 v2.0
@@ -122,8 +122,12 @@ textFit determines reasonable minimum and maximum bounds for your text. The defa
 
 To ensure accurate results with various font-faces, line-heights, and letter-spacings, textFit resizes the text
 until it fits the box as accurately as possible. Unlike many similar plugins, textFit uses **binary search** to
-find the correct fit, which speeds the process significantly. textFit() is fast enough to use in production
+find the correct fit, which speeds the process significantly. textFit is fast enough to use in production
 websites.
+
+`textFit()` is a synchronous function. Because of this, resizes should be invisible as the render thread does not
+have a chance to do a layout until completion. Normal processing times should be < 1ms and should not significantly
+block renders.
 
 Default Settings
 ----------------
@@ -139,7 +143,8 @@ settings = {
     minFontSize: 6,
     maxFontSize: 80,
     reProcess: true, // if true, textFit will re-process already-fit nodes. Set to 'false' for better performance
-    widthOnly: false // if true, textFit will fit text to element width, regardless of text height
+    widthOnly: false, // if true, textFit will fit text to element width, regardless of text height
+    suppressErrors: false // if true, will not print errors to console
 };
 ```
 
