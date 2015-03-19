@@ -17,6 +17,14 @@ Functionality is identical between v1.0 and v2.0, the only change was the remova
 Changelog
 =========
 
+v2.2.0
+------
+
+* Throw errors instead of just printing to console when missing height/width.
+  - Removed `options.suppressErrors`. Wrap in `try/catch` instead if you really need this.
+* Slight refactor.
+* Added automatic build on prepublish.
+
 v2.1.1
 ------
 
@@ -143,8 +151,7 @@ settings = {
     minFontSize: 6,
     maxFontSize: 80,
     reProcess: true, // if true, textFit will re-process already-fit nodes. Set to 'false' for better performance
-    widthOnly: false, // if true, textFit will fit text to element width, regardless of text height
-    suppressErrors: false // if true, will not print errors to console
+    widthOnly: false // if true, textFit will fit text to element width, regardless of text height
 };
 ```
 
