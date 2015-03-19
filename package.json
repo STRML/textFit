@@ -7,7 +7,9 @@
     "example": "examples"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "uglifyjs textFit.js > textFit.min.js",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -26,5 +28,8 @@
   "homepage": "https://github.com/STRML/textFit",
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
+  },
+  "devDependencies": {
+    "uglify-js": "^2.4.17"
   }
 }
