@@ -39,8 +39,7 @@
     minFontSize: 6,
     maxFontSize: 80,
     reProcess: true, // if true, textFit will re-process already-fit nodes. Set to 'false' for better performance
-    widthOnly: false, // if true, textFit will fit text to element width, regardless of text height
-    suppressErrors: false // if true, will not print errors to console
+    widthOnly: false // if true, textFit will fit text to element width, regardless of text height
   };
 
   return function textFit(els, options, callback) {
@@ -99,16 +98,12 @@
 
     // Don't process if we can't find box dimensions
     if (!originalWidth || (!settings.widthOnly && !originalHeight)) {
-      // Show an error, if we can.
-      if (!settings.suppressErrors) {
-        if(!settings.widthOnly)
-          throw new Error('Set a static height and width on the target element ' + el.outerHTML +
-            ' before using textFit!');
-        else
-          throw new Error('Set a static width on the target element ' + el.outerHTML +
-            ' before using textFit!');
-      }
-      return false;
+      if(!settings.widthOnly)
+        throw new Error('Set a static height and width on the target element ' + el.outerHTML +
+          ' before using textFit!');
+      else
+        throw new Error('Set a static width on the target element ' + el.outerHTML +
+          ' before using textFit!');
     }
 
     // Add textFitted span inside this container.
