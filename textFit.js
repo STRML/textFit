@@ -136,7 +136,7 @@
     // Not guaranteed to always work if you use wonky line-heights
     var multiLine = settings.multiLine;
     if (settings.detectMultiLine && !multiLine &&
-        innerSpan.offsetHeight >= parseInt(window.getComputedStyle(innerSpan)['font-size'], 10) * 2){
+        innerSpan.scrollHeight >= parseInt(window.getComputedStyle(innerSpan)['font-size'], 10) * 2){
       multiLine = true;
     }
 
@@ -152,7 +152,7 @@
     while (low <= high) {
       mid = parseInt((low + high) / 2, 10);
       innerSpan.style.fontSize = mid + 'px';
-      if(innerSpan.offsetWidth <= originalWidth && (settings.widthOnly || innerSpan.offsetHeight <= originalHeight)){
+      if(innerSpan.scrollWidth <= originalWidth && (settings.widthOnly || innerSpan.scrollHeight <= originalHeight)){
         low = mid + 1;
       } else {
         high = mid - 1;
@@ -164,7 +164,7 @@
     // Our height is finalized. If we are aligning vertically, set that up.
     if (settings.alignVert) {
       addStyleSheet();
-      var height = innerSpan.offsetHeight;
+      var height = innerSpan.scrollHeight;
       if (window.getComputedStyle(el)['position'] === "static"){
         el.style['position'] = 'relative';
       }
