@@ -44,6 +44,8 @@
 
   return function textFit(els, options, callback) {
 
+    if (!options) options = {};
+
     if (typeof callback !== 'function') callback = function() {};
 
     // Extend options.
