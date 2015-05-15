@@ -43,6 +43,9 @@
   };
 
   return function textFit(els, options, callback) {
+    if(options == null){
+      options = {};
+    }
 
     if (!options) options = {};
 
