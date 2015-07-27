@@ -42,11 +42,9 @@
     widthOnly: false // if true, textFit will fit text to element width, regardless of text height
   };
 
-  return function textFit(els, options, callback) {
+  return function textFit(els, options) {
 
     if (!options) options = {};
-
-    if (typeof callback !== 'function') callback = function() {};
 
     // Extend options.
     var settings = {};
