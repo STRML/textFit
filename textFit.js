@@ -39,7 +39,8 @@
     minFontSize: 6,
     maxFontSize: 80,
     reProcess: true, // if true, textFit will re-process already-fit nodes. Set to 'false' for better performance
-    widthOnly: false // if true, textFit will fit text to element width, regardless of text height
+    widthOnly: false, // if true, textFit will fit text to element width, regardless of text height
+    alignVertWithFlexbox: false, // if true, textFit will use flexbox for vertical alignment
   };
 
   return function textFit(els, options) {
@@ -123,6 +124,7 @@
       if (hasClass(innerSpan, 'textFitAlignVert')){
         innerSpan.className = innerSpan.className.replace('textFitAlignVert', '');
         innerSpan.style['height'] = '';
+        el.className.replace('textFitAlignVertFlex', '');
       }
     }
 
@@ -172,6 +174,9 @@
         innerSpan.className = innerSpan.className + " textFitAlignVert";
       }
       innerSpan.style['height'] = height + "px";
+      if (settings.alignVertWithFlexbox && !hasClass(el, "textFitAlignVertFlex")) {
+        el.className = el.className + " textFitAlignVertFlex";
+      }
     }
   }
 
@@ -211,7 +216,16 @@
         "position: absolute;",
         "top: 0; right: 0; bottom: 0; left: 0;",
         "margin: auto;",
-      "}"].join("");
+        "display: flex;",
+        "justify-content: center;",
+        "flex-direction: column;",
+      "}",
+      ".textFitAlignVertFlex{",
+        "display: flex;",
+      "}",
+      ".textFitAlignVertFlex .textFitAlignVert{",
+        "position: static;",
+      "}",].join("");
 
     var css = document.createElement("style");
     css.type = "text/css";

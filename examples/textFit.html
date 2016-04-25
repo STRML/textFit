@@ -18,6 +18,7 @@
         textFit(document.getElementById('vertCentered'), {alignVert: true, multiLine: true});
         textFit(document.getElementById('centeredMultiLine'), {alignHoriz: true, alignVert: true});
         textFit(document.getElementById('maxFontSize'), {maxFontSize: 40});
+        textFit(document.getElementById('paddingVert'), {alignVert: true, alignHoriz: true, alignVertWithFlexbox: true});
       }
     </script>
     <style>
@@ -76,6 +77,9 @@
       }
       #padding{
         padding: 30px;
+      }
+      #paddingVert {
+        padding: 0 30px 30px 30px;
       }
       .optionalCSS{
         color: #D4C4A9;
@@ -142,7 +146,11 @@
     <div id="padding" class="optionalCSS">
       Use Any Custom Padding
     </div>
-    <a class="homeLink" href="http://strml.github.com">Created by STRML</a>
+    <div id="paddingVert" class="optionalCSS">
+      Use Padding With Flexbox<br>
+      For Better Vert Alignment!
+    </div>
+    <a class="homeLink" href="http://strml.net">Created by STRML</a>
     <script>
       doFit()
     </script>
