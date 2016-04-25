@@ -1,9 +1,21 @@
-textFit v2.1.0
-==============
+`textFit` - Hassle-Free Text Fitting
+==================================
 
-A **fast**, jQuery-free text sizing component that quickly fits single and multi-line text to the width (and optionally height) of its container.
+A **fast**, dependency-free text sizing component that quickly fits single and multi-line text to the width and/or height of its container.
 
 [Example](http://strml.github.com/examples/textFit.html)
+
+Capabilities
+============
+
+`textFit` is:
+
+* Fast, using binary search to quickly fit text to its container in `log n` time, making it far faster than most solutions.
+  * Most fits are `<1ms`. See the [implementation details](#implementation-details).
+* Dependency-free.
+* Small. `4.1KB` minified and `1.5KB` gzipped.
+* Supports both horizontal and vertical centering, including vertical centering with Flexbox for maximum accuracy.
+* Supports any font face, padding, and multiline text.
 
 Browser Support
 ===============
@@ -16,6 +28,11 @@ Functionality is identical between v1.0 and v2.0, the only change was the remova
 
 Changelog
 =========
+
+v2.3.0
+------
+
+* Added `alignVertWithFlexbox`. This does better vertical alignment and fixes #14.
 
 v2.2.0
 ------
@@ -151,7 +168,8 @@ settings = {
     minFontSize: 6,
     maxFontSize: 80,
     reProcess: true, // if true, textFit will re-process already-fit nodes. Set to 'false' for better performance
-    widthOnly: false // if true, textFit will fit text to element width, regardless of text height
+    widthOnly: false, // if true, textFit will fit text to element width, regardless of text height
+    alignVertWithFlexbox: false, // if true, textFit will use flexbox for vertical alignment
 };
 ```
 
