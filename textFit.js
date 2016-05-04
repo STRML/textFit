@@ -64,7 +64,8 @@
 
     // Support passing a single el
     var elType = Object.prototype.toString.call(els);
-    if (elType !== '[object Array]' && elType !== '[object NodeList]'){
+    if (elType !== '[object Array]' && elType !== '[object NodeList]' &&
+            elType !== '[object HTMLCollection]'){
       els = [els];
     }
 
