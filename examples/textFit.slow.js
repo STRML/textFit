@@ -1,7 +1,7 @@
 // Copy of textFit.js with interval call so users can see fitting in progress.
 
 /**
- * textFit v2.3.0
+ * textFit v2.3.1
  * Previously known as jQuery.textFit
  * 11/2014 by STRML (strml.github.com)
  * MIT License

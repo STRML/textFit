@@ -29,6 +29,11 @@ Functionality is identical between v1.0 and v2.0, the only change was the remova
 Changelog
 =========
 
+v2.3.1
+------
+
+* Fix [#20](https://github.com/STRML/textFit/issues/20) - properly iterate over `HTMLCollection` objects.
+
 v2.3.0
 ------
 
