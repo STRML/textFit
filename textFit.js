@@ -43,7 +43,7 @@
     alignVertWithFlexbox: false, // if true, textFit will use flexbox for vertical alignment
   };
 
-  return function textFit(els, options) {
+  return function textFit(els, options, callback) {
 
     if (!options) options = {};
 
@@ -73,6 +73,9 @@
     for(var i = 0; i < els.length; i++){
       processItem(els[i], settings);
     }
+
+    if (typeof callback !== 'function') callback = function() {};
+    callback(els, options);
   };
 
   /**
