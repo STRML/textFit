@@ -152,10 +152,11 @@
     high = settings.maxFontSize + 1;
 
     // Binary search for best fit
+    var limit = 1.0;
     while (low <= high) {
       mid = parseInt((low + high) / 2, 10);
       innerSpan.style.fontSize = mid + 'px';
-      if(innerSpan.scrollWidth <= originalWidth && (settings.widthOnly || innerSpan.scrollHeight <= originalHeight)){
+      if(Math.abs(innerSpan.scrollWidth - originalWidth) <= limit && (settings.widthOnly || Math.abs(innerSpan.scrollHeight - originalHeight) <= limit)){
         low = mid + 1;
       } else {
         high = mid - 1;
