@@ -148,21 +148,23 @@
       el.style['white-space'] = 'nowrap';
     }
 
-    low = settings.minFontSize + 1;
-    high = settings.maxFontSize + 1;
+    low = settings.minFontSize;
+    high = settings.maxFontSize;
 
-    // Binary search for best fit
+    // Binary search for highest best fit
+    var size = low;
     while (low <= high) {
-      mid = parseInt((low + high) / 2, 10);
+      mid = (high + low) >> 1;
       innerSpan.style.fontSize = mid + 'px';
       if(innerSpan.scrollWidth <= originalWidth && (settings.widthOnly || innerSpan.scrollHeight <= originalHeight)){
+        size = mid;
         low = mid + 1;
       } else {
         high = mid - 1;
       }
     }
-    // Sub 1 at the very end, this is closer to what we wanted.
-    innerSpan.style.fontSize = (mid - 1) + 'px';
+    // found, updating font if differs:
+    if( innerSpan.style.fontSize != size + 'px' ) innerSpan.style.fontSize = size + 'px';
 
     // Our height is finalized. If we are aligning vertically, set that up.
     if (settings.alignVert) {
