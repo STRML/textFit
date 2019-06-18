@@ -2,7 +2,27 @@
 "http://www.w3.org/TR/html4/strict.dtd">
 <html>
   <head>
-    <script src="textFit.slow.js"></script>
+    <script>
+      window.onerror = function (msg, url, lineNo, columnNo, error) {
+        function removeById(id) {
+          var el = document.getElementById(id);
+          el.parentElement.removeChild(el);
+        }
+        removeById('textFitLib');
+
+        setTimeout(function() {
+          removeById('slowMotion');
+
+          // Switch to fast lib which doesn't use async/await
+          var fastScript = document.createElement('script');
+          fastScript.src = 'textFit.js';
+          fastScript.onload = function() {
+            waitForTextFit();
+          }
+          document.body.appendChild(fastScript);
+        }, 16);
+      };
+    </script>
     <link href='http://fonts.googleapis.com/css?family=Astloch' rel='stylesheet' type='text/css'>
     <script>
       function doFit(){
@@ -20,7 +40,17 @@
         textFit(document.getElementById('maxFontSize'), {maxFontSize: 40});
         textFit(document.getElementById('paddingVert'), {alignVert: true, alignHoriz: true, alignVertWithFlexbox: true});
       }
+      function waitForTextFit() {
+        var interval = setInterval(function() {
+          if (window.textFit) {
+            clearInterval(interval);
+            doFit();
+          }
+        }, 50); 
+      }
+      waitForTextFit();
     </script>
+    <script id="textFitLib" src="textFit.slow.js"></script>
     <style>
       body{
         background: #3F3F3F;
@@ -106,7 +136,9 @@
       <h4>
         TextFit does <u>not</u> require jQuery.
       </h4>
-      <p> For illustration, these examples are run in <u>slow motion</u> using setInterval. Actual sizings are invisible and average &lt;2ms.</p>
+      <p id="slowMotion"> 
+        For illustration, these examples are run in <u>slow motion</u> using setInterval. Actual sizings are invisible and average &lt;2ms.
+      </p>
       <p> View source to see how options are applied.</p>
     </span>
     <div id="container">
@@ -151,8 +183,5 @@
       For Better Vert Alignment!
     </div>
     <a class="homeLink" href="http://strml.net">Created by STRML</a>
-    <script>
-      doFit()
-    </script>
   </body>
 </html>

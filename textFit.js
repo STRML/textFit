@@ -160,6 +160,7 @@
       } else {
         high = mid - 1;
       }
+      // await injection point
     }
     // Sub 1 at the very end, this is closer to what we wanted.
     innerSpan.style.fontSize = (mid - 1) + 'px';
