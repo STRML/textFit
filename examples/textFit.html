@@ -39,6 +39,12 @@
         textFit(document.getElementById('centeredMultiLine'), {alignHoriz: true, alignVert: true});
         textFit(document.getElementById('maxFontSize'), {maxFontSize: 40});
         textFit(document.getElementById('paddingVert'), {alignVert: true, alignHoriz: true, alignVertWithFlexbox: true});
+        textFit(document.getElementById('rem'), {minFontSize: 0.2, maxFontSize: 4, multiLine: true, fontUnit: 'rem', fontChangeSize: 0.01});
+        textFit(document.getElementById('rem2'), {minFontSize: 0.2, maxFontSize: 4, multiLine: true, fontUnit: 'rem', fontChangeSize: 0.1});
+        textFit(document.getElementById('percentage'), {minFontSize: 1, maxFontSize: 100, multiLine: true, fontUnit: '%'});
+        textFit(document.getElementById('overflow'), { minFontSize: 20, stopOverflow: true });
+        textFit(document.getElementById('maxLines'), { maxLines: 2, alignVert: true, });
+        
       }
       function waitForTextFit() {
         var interval = setInterval(function() {
@@ -124,7 +130,9 @@
       .homeLink:hover{
         color: #ACC1AC;
       }
-
+      #percentage {
+        font-size: 4rem;
+      }
     </style>
   </head>
   <body>
@@ -181,6 +189,26 @@
     <div id="paddingVert" class="optionalCSS">
       Use Padding With Flexbox<br>
       For Custom Vert Alignment!
+    </div>
+    <div id="rem"  class="optionalCSS">
+      fontChangeSize + fontUnit<br>
+      rems instead of px font at a font change of 0.01<br>
+    </div>
+    <div id="rem2"  class="optionalCSS">
+      fontChangeSize + fontUnit<br>
+      rems instead of px font at a font change of 0.1<br>
+    </div>
+    <div id="percentage"  class="optionalCSS">
+      fontUnit<br>
+      % instead of px font<br>
+    </div>
+    <div id="overflow"  class="optionalCSS">
+      stopOverflow: true<br>
+      the minFontSize is 20 but there is still overflow. the stopOverflow setting is hidding it Consequat etiam placerat ornare class, sit curae eget. Sem litora interdum mattis, etiam porta potenti ac metus sit curabitur id metus risus condimentum libero. Rutrum congue lectus quam? Leo diam tempus donec molestie dictum etiam vivamus? Velit aliquam lobortis elit urna aliquet curabitur, tempus odio rhoncus. Magna tristique felis magna euismod lorem integer a suspendisse? Tortor venenatis convallis non, ac nisi ornare. Auctor rutrum mattis malesuada tincidunt erat dictumst phasellus porta. Gravida bibendum curae? Quis rutrum! Hac nunc ultricies feugiat neque urna. Congue sagittis fusce, pretium dui praesent ligula semper platea elementum, netus id! Sodales a id nullam condimentum magna dolor vitae! Nulla primis vestibulum imperdiet proin etiam, aenean feugiat porta conubia. Imperdiet nec cras nostra vehicula felis semper convallis ornare lacinia neque etiam, erat nostra dolor lacinia, pulvinar accumsan, lacus aliquet tincidunt. Volutpat nibh aenean aliquet aenean phasellus mollis vulputate congue at elit. Etiam laoreet feugiat. Habitant ut. Ut nulla curabitur rutrum, himenaeos sapien gravida. Venenatis dictum platea iaculis! Ultricies mattis risus quisque. Metus dolor maecenas nec curabitur non. Neque viverra ac dictum. Nisi est nunc eleifend tempor suspendisse scelerisque. Primis id congue non integer! Nam amet donec lobortis, donec nostra est sociosqu! Curae tempor placerat suspendisse! Tempor aenean.<br>
+    </div>
+    <div id="maxLines"  class="optionalCSS">
+      maxLines: 2
+      there is more than two lines of content here but it's only showing two 
     </div>
     <a class="homeLink" href="http://strml.net">Created by STRML</a>
   </body>

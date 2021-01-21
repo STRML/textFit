@@ -29,6 +29,14 @@ Functionality is identical between v1.0 and v2.0, the only change was the remova
 Changelog
 =========
 
+v2.4.0
+------
+
+* Added `stopOverflow`. If there is too much text then the text will still overflow outside of the div at the smallest font size. Setting stopOverflow to true will add a `.overflow` class to the seleted div if the text is overflowing. It also adds CSS which hides the text that is overflowing in order to keep the design of the page.
+* Added `maxLines`. Similar to stopOverflow but instead it adds the class if there is too many lines of text. This setting takes an input of `false` or a number of lines to apply the limit at. This needs to be improved but it's still useful to have now.
+* Added `fontUnit`. Changes the unit used in the minFontSize and maxFontSize. This allows units such as cm, mm, in, pt, pc, em, vw, vh, % and rem to be used instead of px.
+* Added `fontChangeSize`. This changes the amount of the font is changed by when trying to find the final font size. The default is 1 but changing this to a decimal is sometimes needed. When using rem or em font units 0.1 or 0.01 is a recommended change size.
+
 v2.3.1
 ------
 
@@ -170,6 +178,9 @@ settings = {
     alignHoriz: false, // if true, textFit will set text-align: center
     multiLine: false, // if true, textFit will not set white-space: no-wrap
     detectMultiLine: true, // disable to turn off automatic multi-line sensing
+    stopOverflow: false, // if true, a error we be thrown if the content is overflowing
+    fontUnit: 'px', // what unit should the final font be. using rems or mm is sometimes useful
+    fontChangeSize: 1, // how much should the font size by ajusted by each time. 0.1 and 0.01 is useful for when using a rem font unit
     minFontSize: 6,
     maxFontSize: 80,
     reProcess: true, // if true, textFit will re-process already-fit nodes. Set to 'false' for better performance
