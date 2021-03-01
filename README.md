@@ -3,7 +3,7 @@
 
 A **fast**, dependency-free text sizing component that quickly fits single and multi-line text to the width and/or height of its container.
 
-[Example](http://strml.github.com/examples/textFit.html)
+[Example](https://textfit.strml.net/examples/textFit.html)
 
 Capabilities
 ============
