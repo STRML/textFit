@@ -17,7 +17,7 @@ declare module "textfit" {
   export = textFit;
 
   function textFit(
-    els: HTMLElement | HTMLElement[] | HTMLCollection | NodeList,
+    els: Element | Element[] | NodeListOf<Element> | HTMLCollection | null,
     options?: textFitOptions
   ): void;
 }
