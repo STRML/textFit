@@ -3,15 +3,15 @@
 
 declare module "textfit" {
   interface textFitOptions {
-    alignVert: boolean;
-    alignHoriz: boolean;
-    multiLine: boolean;
-    detectMultiLine: boolean;
-    minFontSize: number;
-    maxFontSize: number;
-    reProcess: boolean;
-    widthOnly: boolean;
-    alignVertWithFlexbox: boolean;
+    alignVert?: boolean;
+    alignHoriz?: boolean;
+    multiLine?: boolean;
+    detectMultiLine?: boolean;
+    minFontSize?: number;
+    maxFontSize?: number;
+    reProcess?: boolean;
+    widthOnly?: boolean;
+    alignVertWithFlexbox?: boolean;
   }
 
   export = textFit;
