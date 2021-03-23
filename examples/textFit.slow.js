@@ -84,7 +84,7 @@
    * @param  {DOMElement} el       Child el.
    * @param  {Object} settings     Options for fit.
    */
-  function processItem(el, settings){
+  async function processItem(el, settings){
     if (!isElement(el) || (!settings.reProcess && el.getAttribute('textFitted'))) {
       return false;
     }
@@ -168,7 +168,7 @@
       } else {
         high = mid - settings.fontChangeSize;
       }
-      // await injection point
+      await new Promise((resolve) => setTimeout(resolve, 500));
     }
     if (startingSize !== size) {
       console.log('textFit font changed size: ', size + settings.fontUnit)
