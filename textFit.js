@@ -41,6 +41,7 @@
     reProcess: true, // if true, textFit will re-process already-fit nodes. Set to 'false' for better performance
     widthOnly: false, // if true, textFit will fit text to element width, regardless of text height
     alignVertWithFlexbox: false, // if true, textFit will use flexbox for vertical alignment
+    ignoreZeroSize: false, // if true, textFit will not fail if inner width or height is 0
   };
 
   return function textFit(els, options) {
@@ -100,6 +101,9 @@
 
     // Don't process if we can't find box dimensions
     if (!originalWidth || (!settings.widthOnly && !originalHeight)) {
+      if (settings.ignoreZeroSize) {
+        return
+      }
       if(!settings.widthOnly)
         throw new Error('Set a static height and width on the target element ' + el.outerHTML +
           ' before using textFit!');
