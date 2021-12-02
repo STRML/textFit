@@ -40,6 +40,7 @@
     maxFontSize: 80,
     reProcess: true, // if true, textFit will re-process already-fit nodes. Set to 'false' for better performance
     widthOnly: false, // if true, textFit will fit text to element width, regardless of text height
+    heightOnly: false, // if true, textFit will fit text to element height, regardless of text width
     alignVertWithFlexbox: false, // if true, textFit will use flexbox for vertical alignment
   };
 
@@ -99,12 +100,15 @@
     originalHeight = innerHeight(el);
 
     // Don't process if we can't find box dimensions
-    if (!originalWidth || (!settings.widthOnly && !originalHeight)) {
-      if(!settings.widthOnly)
+    if ((!settings.heightOnly && !originalWidth) || (!settings.widthOnly && !originalHeight)) {
+      if(!settings.widthOnly && !settings.heightOnly)
         throw new Error('Set a static height and width on the target element ' + el.outerHTML +
           ' before using textFit!');
-      else
+      else if (!settings.heightOnly)
         throw new Error('Set a static width on the target element ' + el.outerHTML +
+          ' before using textFit!');
+      else if (!settings.widthOnly)
+        throw new Error('Set a static height on the target element ' + el.outerHTML +
           ' before using textFit!');
     }
 
@@ -158,8 +162,8 @@
       innerSpan.style.fontSize = mid + 'px';
       var innerSpanBoundingClientRect = innerSpan.getBoundingClientRect();
       if (
-        innerSpanBoundingClientRect.width <= originalWidth 
-        && (settings.widthOnly || innerSpanBoundingClientRect.height <= originalHeight)
+           (settings.heightOnly || innerSpanBoundingClientRect.width  <= originalWidth)
+        && (settings.widthOnly  || innerSpanBoundingClientRect.height <= originalHeight)
       ) {
         size = mid;
         low = mid + 1;

@@ -174,6 +174,7 @@ settings = {
     maxFontSize: 80,
     reProcess: true, // if true, textFit will re-process already-fit nodes. Set to 'false' for better performance
     widthOnly: false, // if true, textFit will fit text to element width, regardless of text height
+    heightOnly: false, // if true, textFit will fit text to element height, regardless of text width
     alignVertWithFlexbox: false, // if true, textFit will use flexbox for vertical alignment
 };
 ```

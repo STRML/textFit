@@ -11,6 +11,7 @@ declare module "textfit" {
     maxFontSize?: number;
     reProcess?: boolean;
     widthOnly?: boolean;
+    heightOnly?: boolean;
     alignVertWithFlexbox?: boolean;
   }
 
