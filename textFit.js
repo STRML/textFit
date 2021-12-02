@@ -143,7 +143,7 @@
     // Not guaranteed to always work if you use wonky line-heights
     var multiLine = settings.multiLine;
     if (settings.detectMultiLine && !multiLine &&
-        innerSpan.scrollHeight >= parseInt(window.getComputedStyle(innerSpan)['font-size'], 10) * 2){
+        innerSpan.getBoundingClientRect().height >= parseInt(window.getComputedStyle(innerSpan)['font-size'], 10) * 2){
       multiLine = true;
     }
 
@@ -160,7 +160,11 @@
     while (low <= high) {
       mid = (high + low) >> 1;
       innerSpan.style.fontSize = mid + 'px';
-      if((settings.heightOnly || innerSpan.scrollWidth <= originalWidth) && (settings.widthOnly || innerSpan.scrollHeight <= originalHeight)){
+      var innerSpanBoundingClientRect = innerSpan.getBoundingClientRect();
+      if (
+           (settings.heightOnly || innerSpanBoundingClientRect.width  <= originalWidth)
+        && (settings.widthOnly  || innerSpanBoundingClientRect.height <= originalHeight)
+      ) {
         size = mid;
         low = mid + 1;
       } else {
@@ -191,7 +195,7 @@
   // Calculate height without padding.
   function innerHeight(el){
     var style = window.getComputedStyle(el, null);
-    return el.clientHeight -
+    return el.getBoundingClientRect().height -
       parseInt(style.getPropertyValue('padding-top'), 10) -
       parseInt(style.getPropertyValue('padding-bottom'), 10);
   }
@@ -199,7 +203,7 @@
   // Calculate width without padding.
   function innerWidth(el){
     var style = window.getComputedStyle(el, null);
-    return el.clientWidth -
+    return el.getBoundingClientRect().width -
       parseInt(style.getPropertyValue('padding-left'), 10) -
       parseInt(style.getPropertyValue('padding-right'), 10);
   }
@@ -242,4 +246,3 @@
     document.body.appendChild(css);
   }
 }));
-

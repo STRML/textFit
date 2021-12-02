@@ -3,12 +3,14 @@
   "version": "2.4.0",
   "description": "A fast, jQuery-free text sizing component that quickly fits single and multi-line text to the width (and optionally height) of its container.",
   "main": "textFit.js",
+  "types": "index.d.ts",
   "directories": {
     "example": "examples"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "uglifyjs textFit.js > textFit.min.js",
+    "build-example": "sh examples/mk-examples.sh",
     "prepublish": "npm run build"
   },
   "repository": {
