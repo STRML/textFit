@@ -121,12 +121,17 @@
     } else {
       // Reprocessing.
       innerSpan = el.querySelector('span.textFitted');
+      innerSpan.style['fontSize'] = '';
+
       // Remove vertical align if we're reprocessing.
       if (hasClass(innerSpan, 'textFitAlignVert')){
         innerSpan.className = innerSpan.className.replace('textFitAlignVert', '');
         innerSpan.style['height'] = '';
         el.className.replace('textFitAlignVertFlex', '');
       }
+
+      originalWidth = innerWidth(el);
+      originalHeight = innerHeight(el);
     }
 
     // Prepare & set alignment
